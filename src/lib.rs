@@ -10,10 +10,15 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 extern "C" {
-    fn alert(s: &str);
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(msg: &str);
+}
+
+macro_rules! console_log {
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
 
 #[wasm_bindgen]
-pub fn greet() {
-    alert("Hello, apng-maker-wasm!");
+pub fn apng_encode_all(files: Vec<&str>) {
+    console_log!("{}", files[0])
 }
