@@ -3,7 +3,7 @@ mod utils;
 use apng;
 use apng::Encoder;
 use apng::{Frame, PNGImage};
-use std::io::{BufWriter, Write};
+use std::io::BufWriter;
 
 use wasm_bindgen::prelude::*;
 
@@ -30,7 +30,7 @@ macro_rules! console_log {
 
 #[wasm_bindgen (js_name = apngEncode)]
 pub fn apng_encode(data: Vec<u8>, data2: Vec<u8>) -> Vec<u8> {
-    console_log!("yayayaya!!");
+    console_log!("encoding in apng_encode");
 
     let img = image::load_from_memory_with_format(&data, image::ImageFormat::PNG).unwrap();
     let img2 = image::load_from_memory_with_format(&data2, image::ImageFormat::PNG).unwrap();
@@ -57,6 +57,5 @@ pub fn apng_encode(data: Vec<u8>, data2: Vec<u8>) -> Vec<u8> {
         }
     }
 
-    console_log!("buf len: {:?}", &buf);
     buf
 }
