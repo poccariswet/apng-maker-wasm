@@ -7,6 +7,11 @@ use std::io::BufWriter;
 
 use wasm_bindgen::prelude::*;
 
+#[wasm_bindgen(start)]
+pub fn initialize() {
+    utils::set_panic_hook();
+}
+
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
 #[cfg(feature = "wee_alloc")]
@@ -45,6 +50,6 @@ pub fn apng_encode(data: Vec<u8>) {
         Err(err) => console_log!("{}", err),
     }
 
-    let buffer = buf_writer.is_empty();
-    console_log!("{}", buffer);
+    let l = buf_writer.buffer().len();
+    console_log!("buf len: {}", l);
 }
