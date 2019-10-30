@@ -3,14 +3,47 @@
   <head>
     <meta charset="utf-8">
     <title>apng maker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/6.6.3/css/font-awesome.min.css">
   </head>
   <body>
     <script src="./bootstrap.js"></script>
-    <h1> apng maker </h1>
+    <div class="apng-app">
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              APNG maker on wasm
+            </h1>
+          </div>
+        </div>
+      </section>
 
-    <div class="nes-field">
-      <label>input png</label>
-      <input type="file" multiple id="file_input" accept="image/png">
+      <div class="level-item has-text-centered" style="margin-top: 3em;">
+        <p class="subtitle">Input PNG files</p>
+      </div>
+
+      <div class="level-item has-text-centered" style="margin-top: 1em;">
+        <div style="text-align:center; margin-top: 1em;">
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" multiple id="file_input" type="file" accept="image/png">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center; margin-top: 3em;">
+      <img style="-webkit-user-select: none;margin: auto;" id="apng">
     </div>
   </body>
 </html>
