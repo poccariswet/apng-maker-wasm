@@ -3,7 +3,6 @@ mod utils;
 use apng;
 use apng::Encoder;
 use apng::{Frame, PNGImage};
-use serde::{Deserialize, Serialize};
 use std::io::BufWriter;
 use wasm_bindgen::JsCast;
 
