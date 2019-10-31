@@ -5,6 +5,7 @@ use apng::Encoder;
 use apng::{Frame, PNGImage};
 use serde::{Deserialize, Serialize};
 use std::io::BufWriter;
+use wasm_bindgen::JsCast;
 
 use wasm_bindgen::prelude::*;
 
@@ -27,31 +28,45 @@ macro_rules! console_log {
     ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Example {
-    pub field: Vec<Vec<u8>>,
-    pub field2: Vec<u8>,
-}
-
-#[wasm_bindgen (js_name = apngInit)]
-pub fn apng_init() -> JsValue {
-    let example = Example {
-        field: vec![vec![]],
-        field2: vec![],
-    };
-
-    JsValue::from_serde(&example).unwrap()
-}
-
 #[wasm_bindgen (js_name = apngEncodeAll)]
-pub fn apng_encode_all(data: &JsValue) {
-    console_log!("encoding in apng_encode");
+pub fn apng_encode_all(array: js_sys::Array) {
+    console_log!("encoding in apng_encode_all");
 
-    console_log!("{:?}", data);
+    let array: Vec<Vec<u8>> = array
+        .values()
+        .into_iter()
+        .map(|x| {
+            x.unwrap_throw()
+                .unchecked_ref::<js_sys::Uint8Array>()
+                .to_vec()
+        })
+        .collect();
 
-    let example: Example = data.into_serde().unwrap();
+    console_log!("{:?}", array);
 
-    console_log!("{:?}", example)
+    //let mut vv = vec![];
+    //array.values().into_iter().map(|x| {
+    //    let mut v = vec![];
+    //    x.unwrap_throw()
+    //        .unchecked_ref::<js_sys::Uint8Array>()
+    //        .copy_to(&mut v[..]);
+    //    vv.push(v);
+    //});
+
+    //console_log!("{:?}", vv);
+
+    //console_log!("array: {:?}", array);
+
+    //for val in array.values() {
+    //    let v = val.unwrap();
+    //    console_log!("v: {:?}", v);
+    //    //let uint8array: js_sys::Uint8Array = wasm_bindgen::JsCast::unchecked_from_js(v);
+    //    //console_log!("uint8array: {:?}", uint8array);
+    //    //let uint8array = v.dyn_into::<js_sys::Uint8Array>().unwrap().buffer();
+    //    //console_log!("uint8array: {:?}", uint8array);
+    //    //let uint8array = v.unchecked_into::<js_sys::Uint8Array>();
+    //    //console_log!("uint8array: {:?}", uint8array);
+    //}
 }
 
 #[wasm_bindgen (js_name = apngEncode)]
