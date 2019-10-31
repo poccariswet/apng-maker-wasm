@@ -17,6 +17,7 @@ wee_alloc = { version = "0.4.2", optional = true }
 apng = "0.1.3"
 image = "0.22.3"
 serde = { version = "1.0.102", features = ["derive"] }
+js-sys = "0.3.30"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.2"
