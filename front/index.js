@@ -20,7 +20,6 @@ document.getElementById('file_input').onchange = function() {
 
   setTimeout(() => {
     console.log('encode proccessing');
-    //let buffer = wasm.apngEncode(file_bufs[0], file_bufs[1], file_bufs[2])
     let buffer = wasm.apngEncodeAll(file_bufs);
     var blob = new Blob([buffer], {type: 'image/png'});
     var url = window.URL.createObjectURL(blob);
