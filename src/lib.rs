@@ -27,49 +27,6 @@ macro_rules! console_log {
     ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
 
-//#[wasm_bindgen (js_name = apngEncodeAll)]
-//pub fn apng_encode_all(array: js_sys::Array) {
-//    console_log!("encoding in apng_encode_all");
-//
-//    let array: Vec<Vec<u8>> = array
-//        .values()
-//        .into_iter()
-//        .map(|x| {
-//            x.unwrap_throw()
-//                .unchecked_ref::<js_sys::Uint8Array>()
-//                .to_vec()
-//        })
-//        .collect();
-//
-//    for v in array {
-//        console_log!("{:?}", v);
-//    }
-//
-//    //let mut vv = vec![];
-//    //array.values().into_iter().map(|x| {
-//    //    let mut v = vec![];
-//    //    x.unwrap_throw()
-//    //        .unchecked_ref::<js_sys::Uint8Array>()
-//    //        .copy_to(&mut v[..]);
-//    //    vv.push(v);
-//    //});
-//
-//    //console_log!("{:?}", vv);
-//
-//    //console_log!("array: {:?}", array);
-//
-//    //for val in array.values() {
-//    //    let v = val.unwrap();
-//    //    console_log!("v: {:?}", v);
-//    //    //let uint8array: js_sys::Uint8Array = wasm_bindgen::JsCast::unchecked_from_js(v);
-//    //    //console_log!("uint8array: {:?}", uint8array);
-//    //    //let uint8array = v.dyn_into::<js_sys::Uint8Array>().unwrap().buffer();
-//    //    //console_log!("uint8array: {:?}", uint8array);
-//    //    //let uint8array = v.unchecked_into::<js_sys::Uint8Array>();
-//    //    //console_log!("uint8array: {:?}", uint8array);
-//    //}
-//}
-
 #[wasm_bindgen (js_name = apngEncodeAll)]
 pub fn apng_encode_all(data: js_sys::Array) -> Vec<u8> {
     let data: Vec<Vec<u8>> = data
