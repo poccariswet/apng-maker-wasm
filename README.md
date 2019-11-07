@@ -2,7 +2,7 @@
 
 APNG generator web app on wasm
 
-https://apng-generator.netlify.com/
+https://apng-maker.netlify.com/
 
 # demo
 ![apng.gif](./assets/apng-generator.gif)
