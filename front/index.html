@@ -8,6 +8,12 @@
   </head>
   <body>
     <script src="./wasm.js"></script>
+    <style>
+    #preview img {
+      width:100px;
+      border:1px solid #cccccc;
+    }
+    </style>
     <div class="apng-app">
       <section class="hero is-primary">
         <div class="hero-body">
@@ -18,6 +24,8 @@
           </div>
         </div>
       </section>
+
+      <p id="preview"></p>
 
       <div class="level-item has-text-centered" style="margin-top: 3em;">
         <p class="subtitle">Input PNG files</p>

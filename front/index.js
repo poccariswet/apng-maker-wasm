@@ -1,6 +1,16 @@
 import * as wasm from "apng-maker-wasm";
 
 
+/*
+ * struct {
+ *  array: Uint8Array,
+ *  frame_speed: 0 ~ 1
+ * }
+ * */
+
+//TODO: frame speed control bar
+//      一括で操作もできるし、フレームごとにも設定できる
+
 async function readFile(file) {
   const f = await new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -8,7 +18,19 @@ async function readFile(file) {
     reader.addEventListener('error', reject);
     reader.readAsArrayBuffer(file);
   });
-  return new Uint8Array(f);
+
+  const array = new Uint8Array(f)
+  var img = new Image();
+  img.src = uint8ArrayToBase64(array);
+  document.getElementById('preview').appendChild(img);
+
+  return array;
+}
+
+function uint8ArrayToBase64(buffer) {
+  var blob = new Blob([buffer], {type: 'image/png'});
+  var url = window.URL.createObjectURL(blob)
+  return url
 }
 
 async function encode(files) {
