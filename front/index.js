@@ -33,7 +33,8 @@ function uint8ArrayToBase64(buffer) {
   return url
 }
 
-async function encode(files) {
+// Encode all png to APNG
+async function encode(files, frame_speed) {
   let buffers = [];
   for (let i = 0; i<files.length; i++) {
     let buffer = await readFile(files[i])
@@ -41,7 +42,7 @@ async function encode(files) {
   }
 
   console.log('encode proccessing');
-  let buffer = wasm.apngEncodeAll(buffers);
+  let buffer = wasm.apngEncodeAll(buffers, frame_speed);
   var blob = new Blob([buffer], {type: 'image/png'});
   var url = window.URL.createObjectURL(blob);
   var elem = document.getElementById("apng");
@@ -51,7 +52,17 @@ async function encode(files) {
 
 document.getElementById('file_input').onchange = function() {
   let files = document.getElementById('file_input').files;
+  let frame_speed = document.getElementById('frame_speed').value;
 
-  encode(files)
+  encode(files, frame_speed)
 }
 
+
+var slider = document.getElementById("frame_speed");
+var output = document.getElementById("frame_speed_value");
+output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}

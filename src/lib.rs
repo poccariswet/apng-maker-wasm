@@ -28,7 +28,7 @@ macro_rules! console_log {
 }
 
 #[wasm_bindgen (js_name = apngEncodeAll)]
-pub fn apng_encode_all(data: js_sys::Array) -> Vec<u8> {
+pub fn apng_encode_all(data: js_sys::Array, frame_speed: f64) -> Vec<u8> {
     let data: Vec<Vec<u8>> = data
         .values()
         .into_iter()
@@ -51,9 +51,12 @@ pub fn apng_encode_all(data: js_sys::Array) -> Vec<u8> {
 
         let config = apng::create_config(&png_images, None).unwrap();
         let mut encoder = Encoder::new(&mut buf_writer, config).unwrap();
+        let d_num = frame_speed * (100 as f64);
+        let d_den = 100;
+
         let frame = Frame {
-            delay_num: Some(1),
-            delay_den: Some(2),
+            delay_num: Some(d_num as u16),
+            delay_den: Some(d_den),
             ..Default::default()
         };
 
