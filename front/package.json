@@ -1,6 +1,6 @@
 {
   "name": "apng-maker-wasm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server"
